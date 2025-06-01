@@ -203,6 +203,9 @@
 
   <joint name="lidar_joint" type="fixed">
     <!-- TODO: Complete -->
+    <parent link="body_link" />
+    <child link="lidar_link" />
+    <origin xyz="0 0 ${body_link_z_dim/2 + sensor_side/2}"/>
   </joint>
-
+  
 </robot>
