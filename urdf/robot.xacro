@@ -149,15 +149,56 @@
   <!-- Sonar -->
   <link name="sonar_link">
     <!-- TODO: Complete -->
+    <visual>
+      <geometry>
+        <box size="${sensor_side} ${sensor_side} ${sensor_side}"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </geometry>
+    </visual>
+
+    <!--<collision></collision>-->
+
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="${sensor_mass}"/>
+      <inertia 
+        ixx="1e-6" ixy="0.0" ixz="0.0"
+        iyy="1e-6" iyz="0.0"
+        izz="1e-6"/> <!--inertia values are small, indicating that sensors are light weight objects, 1e-6 value is used because it is required to have inertia values for objects-->
+    </inertial>
   </link>
 
   <joint name="sonar_joint" type="fixed">
     <!-- TODO: Complete -->
+    <parent link="body_link"/>
+    <child link="sonar_link"/>
+    <origin xyz="${body_link_x_dim + sensor_side/2} 0 0"/>
+    <axis xyz="0 0 0"/>
   </joint>
 
   <!-- Lidar -->
   <link name="lidar_link">
     <!-- TODO: Complete -->
+    <visual>
+      <geometry>
+        <box size="${sensor_side} ${sensor_side} ${sensor_side}"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </geometry>
+    </visual>
+
+    <collision>
+      <geometry><box size="${sensor_side} ${sensor_side} ${sensor_side}"/></geometry>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </collision>
+
+    <inertial>
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+      <mass value="${sensor_mass}"/>
+      <inertia
+        ixx="1e-6" ixy="0.0" ixz="0.0"
+        iyy="1e-6" iyz="0.0"
+        izz="1e-6"/>
+    </inertial>
   </link>
 
   <joint name="lidar_joint" type="fixed">
