@@ -47,8 +47,8 @@ class TwistFromDatabase(Node):
             return values
         
     def timer_callback(self):
-        if self.index >= len(self.values):
-            self.get_logger().info("All msgs published")
+        if not self.values:
+            self.get_logger().warn('No twist data available')
             return
 
         row = self.values[self.index]
@@ -62,7 +62,9 @@ class TwistFromDatabase(Node):
 
         self.publisher.publish(twist)
         self.get_logger().info("twist msg published: {twist}")
-        self.index += 1
+        
+        # move in cycle
+        self.index = (self.index + 1) % len(self.values)
 
             
 def main(args=None):
